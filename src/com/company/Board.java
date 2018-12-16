@@ -16,7 +16,6 @@ public class Board {
         }
     }
 
-
     public void printGameBoard() {
 
       System.out.println("-------------------");
@@ -31,11 +30,12 @@ public class Board {
 
     }
 
-/*    protected void setMarkOnGameBoard(){
-        gameBoard[row][col] = game.currentPlayer.playerMark;
+    protected void setMarkOnGameBoard(int row, int col){
+
+        System.out.println(gameBoard[row][col]);
 
 
-    }*/
+    }
 
     private boolean boardChecker(Mark col1, Mark col2, Mark col3) {
         return (!col1.equals(Mark.EMP) && (col2.equals(col1)) && (col3.equals(col2)));

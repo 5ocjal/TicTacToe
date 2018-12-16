@@ -9,7 +9,6 @@ public class Main {
     public static void main(String[] args) {
 
         Game game = new Game();
-        Board board = new Board();
 
         try {
             BufferedReader bReader = new BufferedReader(new FileReader("logo.txt"));

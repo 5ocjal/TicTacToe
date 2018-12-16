@@ -13,6 +13,12 @@ public class Game {
     Board board;
 
 
+
+    public Game() {
+        this.board = new Board();
+    }
+
+
     protected void createPlayer() {
 
         player1 = new Player(null, Mark.X, Mark.ACTIVE);
@@ -59,16 +65,17 @@ public class Game {
 
     protected void makeMove() {
 
+
         try {
             System.out.println("Podaj rząd: ");
-            board.row = input.nextInt();
-            if (board.row < 1 || board.row > 3) {
+            board.row = input.nextInt()-1;
+            if (board.row < 0 || board.row > 2) {
                 System.out.println("Podaj wartość od 1 do 3!\n");
                 makeMove();
             } else {
                 System.out.println("Podaj kolumnę: ");
-                board.col = input.nextInt();
-                if (board.col < 1 || board.col > 3) {
+                board.col = input.nextInt()-1;
+                if (board.col < 0 || board.col > 2) {
                     System.out.println("Podaj wartość od 1 do 3!\n");
                     makeMove();
                 }
@@ -77,6 +84,8 @@ public class Game {
             System.out.println("Podaj wartość od 1 do 3!\n");
             makeMove();
         }
+        board.setMarkOnGameBoard(0,0);
     }
+
 }
 
