@@ -6,9 +6,11 @@ import java.io.IOException;
 
 public class Main {
 
+    static Game game = new Game();
+
     public static void main(String[] args) {
 
-        Game game = new Game();
+
 
         try {
             BufferedReader bReader = new BufferedReader(new FileReader("logo.txt"));
@@ -18,16 +20,14 @@ public class Main {
             System.out.println("Error: " + e.getMessage());
         }
 
-        game.createPlayer();
+        game.gameInProgress();
 
-        //do {
+
+/*        //do {
+        game.createPlayer();
         game.changeActivePlayer();
         game.showActivePlayer();
         game.makeMove();
-
-
-
-
-         //} while()
-}
+        //} while()*/
+    }
 }

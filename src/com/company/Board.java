@@ -11,14 +11,14 @@ public class Board {
 
         for (int i = 0; i < gameBoard.length; i++) {
             for (int j = 0; j < gameBoard.length; j++) {
-                gameBoard[i][j] = Mark.EMP;
+                gameBoard[i][j] = Mark.EMPTY;
             }
         }
     }
 
     public void printGameBoard() {
 
-      System.out.println("-------------------");
+        System.out.println("-------------------");
 
         for (int i = 0; i < 3; i++) {
             System.out.print("| ");
@@ -27,24 +27,33 @@ public class Board {
             }
             System.out.println("\n-------------------");
         }
+    }
+
+    protected void setMarkOnGameBoard(int x, int y, Player currentPlayer) {
+
+        gameBoard[x][y] = currentPlayer.getPlayerMark();
+        isGameBoardFull();
+        printGameBoard();
+
+
 
     }
 
-    protected void setMarkOnGameBoard(int row, int col){
-
-        System.out.println(gameBoard[row][col]);
-
-
+    protected boolean isGameBoardFull() {
+        for (int i = 0; i < gameBoard.length; i++)
+            for (int j = 0; j < gameBoard[i].length; j++)
+                if (gameBoard[i][j].equals(Mark.EMPTY))
+                    return false;
+        return true;
     }
 
-    private boolean boardChecker(Mark col1, Mark col2, Mark col3) {
-        return (!col1.equals(Mark.EMP) && (col2.equals(col1)) && (col3.equals(col2)));
+    private boolean checkForVictory(Mark col1, Mark col2, Mark col3) {
+        return (!col1.equals(Mark.EMPTY) && (col2.equals(col1)) && (col3.equals(col2)));
     }
-
 
     private boolean checkRows() {
         for (int i = 0; i < 3; i++) {
-            if (boardChecker(gameBoard[i][0], gameBoard[i][1], gameBoard[i][2]) == true) {
+            if (checkForVictory(gameBoard[i][0], gameBoard[i][1], gameBoard[i][2])) {
                 return true;
             }
         }
@@ -53,7 +62,7 @@ public class Board {
 
     private boolean checkColums() {
         for (int i = 0; i < 3; i++) {
-            if (boardChecker(gameBoard[0][i], gameBoard[1][i], gameBoard[2][i]) == true) {
+            if (checkForVictory(gameBoard[0][i], gameBoard[1][i], gameBoard[2][i])) {
                 return true;
             }
         }
@@ -61,11 +70,9 @@ public class Board {
     }
 
     private boolean checkDiagonal() {
-        for (int i = 0; i < 3; i++) {
-            if ((boardChecker(gameBoard[0][0], gameBoard[1][1], gameBoard[2][2]) == true)
-                    || (boardChecker(gameBoard[0][2], gameBoard[1][1], gameBoard[2][0]) == true)) {
-                return true;
-            }
+        if ((checkForVictory(gameBoard[0][0], gameBoard[1][1], gameBoard[2][2]))
+                || (checkForVictory(gameBoard[0][2], gameBoard[1][1], gameBoard[2][0]))) {
+            return true;
         }
         return false;
     }

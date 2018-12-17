@@ -13,24 +13,36 @@ public class Game {
     Board board;
 
 
-
     public Game() {
         this.board = new Board();
+    }
+
+    public void gameInProgress() {
+        createPlayer();
+
+        do {
+            changeActivePlayer();
+            showActivePlayer();
+            makeMove();
+        }
+        while (board.isGameBoardFull());
+        // check for win
+
     }
 
 
     protected void createPlayer() {
 
-        player1 = new Player(null, Mark.X, Mark.ACTIVE);
-        player2 = new Player(null, Mark.O, Mark.unACTIVE);
+        player1 = new Player(null, Mark.markX, Mark.ACTIVE);
+        player2 = new Player(null, Mark.markO, Mark.unACTIVE);
 
         System.out.println("\nPODAJ IMIĘ GRACZA NR 1:");
         player1.setName(input.nextLine());
-        System.out.println("Witaj " + player1.getName() + ", grasz znakiem " + player1.getPlayerMark() + "\n");
+        System.out.println("Witaj " + player1.getName() + ", grasz znakiem " + player1.active.getMark() + "\n");
 
         System.out.println("PODAJ IMIĘ GRACZA NR 2:");
         player2.setName(input.nextLine());
-        System.out.println("Cześć " + player2.getName() + ", grasz znakiem " + player2.getPlayerMark() + "\n");
+        System.out.println("Cześć " + player2.getName() + ", grasz znakiem " + player2.active.getMark() + "\n");
 
         System.out.println("POWODZENIA!\n");
 
@@ -55,26 +67,25 @@ public class Game {
         if (player1.getActive() == Mark.ACTIVE) {
             currentPlayer = player1;
             System.out.println(player1.getName() + " " + player1.active.getMark() +
-                    " Podaj współrzędne pola, na którym chcesz postawić znacznik " + currentPlayer.playerMark + ":\n");
+                    " Podaj współrzędne pola, na którym chcesz postawić znacznik " + currentPlayer.active.getMark() + ":\n");
         } else {
             currentPlayer = player2;
             System.out.println(player2.getName() + " " + player2.active.getMark() +
-                    " Podaj współrzędne pola, na którym chcesz postawić znacznik " + currentPlayer.playerMark + ":\n");
+                    " Podaj współrzędne pola, na którym chcesz postawić znacznik " + currentPlayer.active.getMark() + ":\n");
         }
     }
 
     protected void makeMove() {
 
-
         try {
             System.out.println("Podaj rząd: ");
-            board.row = input.nextInt()-1;
+            board.row = input.nextInt() - 1;
             if (board.row < 0 || board.row > 2) {
                 System.out.println("Podaj wartość od 1 do 3!\n");
                 makeMove();
             } else {
                 System.out.println("Podaj kolumnę: ");
-                board.col = input.nextInt()-1;
+                board.col = input.nextInt() - 1;
                 if (board.col < 0 || board.col > 2) {
                     System.out.println("Podaj wartość od 1 do 3!\n");
                     makeMove();
@@ -84,8 +95,14 @@ public class Game {
             System.out.println("Podaj wartość od 1 do 3!\n");
             makeMove();
         }
-        board.setMarkOnGameBoard(0,0);
-    }
 
+        if (!board.gameBoard[board.row][board.col].equals(Mark.EMPTY)) {
+            board.setMarkOnGameBoard(board.row, board.col, currentPlayer);
+        } else {
+            System.out.println("Pole jest już zajętę. Wybierz inne!");
+            makeMove();
+        }
+
+    }
 }
 

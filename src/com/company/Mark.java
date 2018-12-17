@@ -2,9 +2,9 @@ package com.company;
 
 public enum Mark {
 
-    X(" X "),
-    O(" O "),
-    EMP("   "),
+    markX(" X "),
+    markO(" O "),
+    EMPTY("   "),
     ACTIVE("teraz Twoja kolej!"),
     unACTIVE("poczekaj na swoja kolej!");
 
