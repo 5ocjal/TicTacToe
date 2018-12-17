@@ -39,11 +39,11 @@ public class Game {
 
         System.out.println("\nPODAJ IMIĘ GRACZA NR 1:");
         player1.setName(input.nextLine());
-        System.out.println("Witaj " + player1.getName() + ", grasz znakiem " + player1.active.getMark() + "\n");
+        System.out.println("Witaj " + player1.getName() + ", grasz znakiem " + player1.getPlayerMark() + "\n");
 
         System.out.println("PODAJ IMIĘ GRACZA NR 2:");
         player2.setName(input.nextLine());
-        System.out.println("Cześć " + player2.getName() + ", grasz znakiem " + player2.active.getMark() + "\n");
+        System.out.println("Cześć " + player2.getName() + ", grasz znakiem " + player2.getPlayerMark() + "\n");
 
         System.out.println("POWODZENIA!\n");
 
