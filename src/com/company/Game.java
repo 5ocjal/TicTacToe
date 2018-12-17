@@ -24,17 +24,18 @@ public class Game {
             changeActivePlayer();
             showActivePlayer();
             makeMove();
+            board.checkForVictory(currentPlayer);
         }
-        while (board.isGameBoardFull());
-        // check for win
+        while (board.isGameBoardFull() == false);
+
 
     }
 
 
     protected void createPlayer() {
 
-        player1 = new Player(null, Mark.markX, Mark.ACTIVE);
-        player2 = new Player(null, Mark.markO, Mark.unACTIVE);
+        player1 = new Player(null, Mark.X, Mark.ACTIVE);
+        player2 = new Player(null, Mark.O, Mark.unACTIVE);
 
         System.out.println("\nPODAJ IMIĘ GRACZA NR 1:");
         player1.setName(input.nextLine());
@@ -67,11 +68,11 @@ public class Game {
         if (player1.getActive() == Mark.ACTIVE) {
             currentPlayer = player1;
             System.out.println(player1.getName() + " " + player1.active.getMark() +
-                    " Podaj współrzędne pola, na którym chcesz postawić znacznik " + currentPlayer.active.getMark() + ":\n");
+                    " Podaj współrzędne pola, na którym chcesz postawić znacznik " + currentPlayer.getPlayerMark() + ":\n");
         } else {
             currentPlayer = player2;
             System.out.println(player2.getName() + " " + player2.active.getMark() +
-                    " Podaj współrzędne pola, na którym chcesz postawić znacznik " + currentPlayer.active.getMark() + ":\n");
+                    " Podaj współrzędne pola, na którym chcesz postawić znacznik " + currentPlayer.getPlayerMark() + ":\n");
         }
     }
 
@@ -96,7 +97,7 @@ public class Game {
             makeMove();
         }
 
-        if (!board.gameBoard[board.row][board.col].equals(Mark.EMPTY)) {
+        if (board.gameBoard[board.row][board.col].equals(Mark.EMPTY)) {
             board.setMarkOnGameBoard(board.row, board.col, currentPlayer);
         } else {
             System.out.println("Pole jest już zajętę. Wybierz inne!");

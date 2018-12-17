@@ -11,7 +11,6 @@ public class Main {
     public static void main(String[] args) {
 
 
-
         try {
             BufferedReader bReader = new BufferedReader(new FileReader("logo.txt"));
             bReader.lines()
@@ -22,12 +21,5 @@ public class Main {
 
         game.gameInProgress();
 
-
-/*        //do {
-        game.createPlayer();
-        game.changeActivePlayer();
-        game.showActivePlayer();
-        game.makeMove();
-        //} while()*/
     }
 }
